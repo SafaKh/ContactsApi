@@ -1,6 +1,23 @@
-@ContactsApi_HostAddress = http://localhost:5084
+@ContactsApi_HostAddress = https://localhost:7288
 
 GET {{ContactsApi_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{ContactsApi_HostAddress}}/weatherforecast
+
+###
+
+GET {{ContactsApi_HostAddress}}/api/contacts
+
+###
+
+POST {{ContactsApi_HostAddress}}/api/contacts
+Content-Type: application/json
+
+{
+  //Contact
+}
 
 ###
