@@ -1,5 +1,4 @@
-﻿using ContactsApi.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ContactsApi.Data
 {
@@ -7,7 +6,6 @@ namespace ContactsApi.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            
         }
 
         public DbSet<Contact> Contacts { get; set; }

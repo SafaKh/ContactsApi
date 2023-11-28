@@ -1,4 +1,4 @@
-﻿namespace ContactsApi.Entities
+﻿namespace ContactsApi.Models
 {
     public class Contact
     {

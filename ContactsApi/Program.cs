@@ -1,4 +1,6 @@
+global using ContactsApi.Models;
 using ContactsApi.Data;
+using ContactsApi.Services.ContactService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IContactService,ContactService>();
 
 var app = builder.Build();
 
