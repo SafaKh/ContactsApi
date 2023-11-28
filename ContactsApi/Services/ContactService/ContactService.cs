@@ -13,58 +13,51 @@ namespace ContactsApi.Services.ContactService
             _context = context;
         }
 
-        public async Task<List<Contact>> CreateContact(Contact contact)
+        public async Task<Contact> CreateContact(Contact contact)
         {
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
-
-            return await _context.Contacts.ToListAsync();
+            return contact;
         }
 
-        public async Task<List<Contact>?> DeleteContact(int id)
+        public async Task<bool> DeleteContact(int id)
         {
             var contact = await _context.Contacts.FindAsync(id);
-            if (contact is null) return null;
+            if (contact is null) return false;
 
             _context.Contacts.Remove(contact);
-
             await _context.SaveChangesAsync();
-            return await _context.Contacts.ToListAsync();
+            return true;
         }
 
         public async Task<List<Contact>> GetAllContacts()
         {
-            var contacts = await _context.Contacts.ToListAsync();
-            return contacts;
+            return await _context.Contacts.ToListAsync();
         }
 
         public async Task<Contact?> GetContactById(int id)
         {
-            var contact = await _context.Contacts.FindAsync(id);
-            if (contact is null)
-            {
-                return null;
-            }
-
-            return contact;
+            return await _context.Contacts.FindAsync(id);
         }
 
-        public async Task<List<Contact>?> UpdateContact(int id, Contact request)
+        public async Task<Contact?> UpdateContact(int id, Contact updatedContact)
         {
-            var contact = await _context.Contacts.FindAsync(id);
-            if (contact is null)
+            var existingContact = await _context.Contacts.FindAsync(id);
+            if (existingContact is null)
             {
                 return null;
             }
-            contact.Fullname = request.Fullname;
-            contact.Firstname = request.Firstname;
-            contact.Lastname = request.Lastname;
-            contact.Email = request.Email;
-            contact.Address = request.Address;
-            contact.MobilePhoneNumber = request.MobilePhoneNumber;
+
+            existingContact.Fullname = updatedContact.Fullname;
+            existingContact.Address = updatedContact.Address;
+            existingContact.MobilePhoneNumber = updatedContact.MobilePhoneNumber;
+            existingContact.Email = updatedContact.Email;
+            existingContact.Firstname = updatedContact.Firstname;
+            existingContact.Lastname = updatedContact.Lastname;
+
 
             await _context.SaveChangesAsync();
-            return await _context.Contacts.ToListAsync();
+            return existingContact;
         }
     }
 }
