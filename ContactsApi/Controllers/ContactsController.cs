@@ -96,6 +96,6 @@ namespace ContactsApi.Controllers
                 _logger.LogError(ex, "Error occurred while deleting contact with ID {ContactId}.", id);
                 return StatusCode(500, "An error occurred while deleting the contact.");
             }
-        }
+        }    
     }
 }

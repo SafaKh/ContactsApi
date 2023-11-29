@@ -32,9 +32,15 @@ namespace ContactsApi.Services.SkillService
             return skill;
         }
 
-        public Task<bool> DeleteSkill(int id)
+        public async Task<bool> DeleteSkill(int id)
         {
-            throw new NotImplementedException();
+            var skill = await _context.Skills.FindAsync(id);
+            if (skill is null) return false;
+
+            _context.Skills.Remove(skill);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public async Task<List<Skill>> GetAllSkill()

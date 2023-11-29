@@ -79,5 +79,22 @@ namespace ContactsApi.Controllers
             }
 
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<Skill>>> DeleteSkill(int id) 
+        {
+            try 
+            {
+                var success = await _skillService.DeleteSkill(id);
+                if (!success) return NotFound("Skill not found");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting Skill with ID {SkillId}.", id);
+                return StatusCode(500, "An error occurred while deleting the Skill.");
+            }
+        }
     }
 }
