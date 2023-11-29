@@ -48,9 +48,26 @@ namespace ContactsApi.Services.SkillService
             return await _context.Skills.Include(c => c.Contacts).FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task<Skill?> UpdateSkill(int id, Skill request)
+        public async Task<Skill?> UpdateSkill(int id, SkillDto skillDto)
         {
-            throw new NotImplementedException();
+            if (skillDto == null)
+            {
+                throw new ArgumentNullException(nameof(skillDto));
+            }
+
+            var skill = await _context.Skills.FindAsync(id);
+            if (skill == null)
+            {
+                return null;
+            }
+
+            skill.Name = skillDto.Name;
+            skill.Level = skillDto.Level;
+
+            _context.Skills.Update(skill);
+            await _context.SaveChangesAsync();
+
+            return skill; 
         }
     }
 }

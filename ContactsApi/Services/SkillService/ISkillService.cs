@@ -7,7 +7,7 @@ namespace ContactsApi.Services.SkillService
         Task<List<Skill>> GetAllSkill();
         Task<Skill?> GetSkillById(int id);
         Task<Skill> CreateSkill(SkillDto contact);
-        Task<Skill?> UpdateSkill(int id, Skill request);
+        Task<Skill?> UpdateSkill(int id, SkillDto skillDto);
         Task<bool> DeleteSkill(int id);
     }
 }

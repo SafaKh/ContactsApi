@@ -57,9 +57,27 @@ namespace ContactsApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while creating a new contact.");
-                return StatusCode(500, "An error occurred while creating the contact.");
+                _logger.LogError(ex, "Error occurred while creating a new skill.");
+                return StatusCode(500, "An error occurred while creating the skill.");
             }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<List<Skill>>> UpdateSkill(int id, SkillDto skill)
+        {
+            try
+            {
+                var updatedSkill = await _skillService.UpdateSkill(id, skill);
+                if (updatedSkill is null) return NotFound("Skill not found");
+
+                return Ok(updatedSkill);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating skill with ID {SkillId}.", id);
+                return StatusCode(500, "An error occurred while updating the skill.");
+            }
+
         }
     }
 }
