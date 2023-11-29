@@ -9,5 +9,6 @@
         public string Address { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string MobilePhoneNumber { get; set; } = string.Empty;
+        public List<Skill>? Skills { get; set; } = null;
     }
 }

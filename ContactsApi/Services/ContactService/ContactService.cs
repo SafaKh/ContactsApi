@@ -1,5 +1,4 @@
-﻿
-using ContactsApi.Data;
+﻿using ContactsApi.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactsApi.Services.ContactService

@@ -1,6 +1,6 @@
 global using ContactsApi.Models;
+global using ContactsApi.Services.ContactService;
 using ContactsApi.Data;
-using ContactsApi.Services.ContactService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

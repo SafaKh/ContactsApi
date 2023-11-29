@@ -1,5 +1,4 @@
-﻿using ContactsApi.Services.ContactService;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsApi.Controllers
 {
