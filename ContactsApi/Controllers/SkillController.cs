@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactsApi.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsApi.Controllers
 {
@@ -30,7 +31,7 @@ namespace ContactsApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Contact>> GetSkillById(int id)
+        public async Task<ActionResult<Skill>> GetSkillById(int id)
         {
             try
             {
@@ -43,6 +44,21 @@ namespace ContactsApi.Controllers
             {
                 _logger.LogError(ex, "Error occurred while retrieving skill with ID {SkillId}.", id);
                 return StatusCode(500, "An error occurred while retrieving the skill.");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<Skill>>> CreateSkill(SkillDto skill)
+        {
+            try
+            {
+                var createdSkill = await _skillService.CreateSkill(skill);
+                return CreatedAtAction(nameof(GetSkillById), new { id = createdSkill.Id }, createdSkill);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while creating a new contact.");
+                return StatusCode(500, "An error occurred while creating the contact.");
             }
         }
     }

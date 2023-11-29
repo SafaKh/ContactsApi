@@ -1,5 +1,6 @@
 ﻿
 using ContactsApi.Data;
+using ContactsApi.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactsApi.Services.SkillService
@@ -12,9 +13,23 @@ namespace ContactsApi.Services.SkillService
             _context = context;
         }
 
-        public Task<Skill> CreateSkill(Skill contact)
+        public async Task<Skill> CreateSkill(SkillDto skillDto)
         {
-            throw new NotImplementedException();
+            if (skillDto == null)
+            {
+                throw new ArgumentNullException(nameof(skillDto));
+            }
+
+            var skill = new Skill
+            {
+                Id = skillDto.Id,
+                Level = skillDto.Level,
+                Name = skillDto.Name
+            };
+
+            _context.Skills.Add(skill);
+            await _context.SaveChangesAsync();
+            return skill;
         }
 
         public Task<bool> DeleteSkill(int id)
