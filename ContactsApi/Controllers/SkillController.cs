@@ -15,6 +15,10 @@ namespace ContactsApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieves a list of all skills.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Skill>>> GetAllSkill()
         {
@@ -30,6 +34,11 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves a specific skill by unique ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Skill>> GetSkillById(int id)
         {
@@ -47,12 +56,17 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new skill.
+        /// </summary>
+        /// <param name="skillDto"></param>
+        /// <returns>A newly created Skill object</returns>
         [HttpPost]
-        public async Task<ActionResult<List<Skill>>> CreateSkill(SkillDto skill)
+        public async Task<ActionResult<Skill>> CreateSkill(SkillDto skillDto)
         {
             try
             {
-                var createdSkill = await _skillService.CreateSkill(skill);
+                var createdSkill = await _skillService.CreateSkill(skillDto);
                 return CreatedAtAction(nameof(GetSkillById), new { id = createdSkill.Id }, createdSkill);
             }
             catch (Exception ex)
@@ -62,8 +76,14 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates a specific skill.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="skill"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Skill>>> UpdateSkill(int id, SkillDto skill)
+        public async Task<ActionResult<Skill>> UpdateSkill(int id, SkillDto skill)
         {
             try
             {
@@ -80,8 +100,13 @@ namespace ContactsApi.Controllers
 
         }
 
+        /// <summary>
+        /// Delete skill
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Skill>>> DeleteSkill(int id) 
+        public async Task<ActionResult> DeleteSkill(int id) 
         {
             try 
             {

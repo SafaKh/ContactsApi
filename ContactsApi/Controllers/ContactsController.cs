@@ -15,6 +15,10 @@ namespace ContactsApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieves a list of all Contacts.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Contact>>> GetAllContacts()
         {
@@ -32,6 +36,11 @@ namespace ContactsApi.Controllers
 
         }
 
+        /// <summary>
+        /// Retrieves a specific contact by unique ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Contact>> GetContactById(int id)
         {
@@ -49,8 +58,13 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new contact.
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns>A newly created contact object</returns>
         [HttpPost]
-        public async Task<ActionResult<List<Contact>>> CreateContact(Contact contact)
+        public async Task<ActionResult<Contact>> CreateContact(Contact contact)
         {
             try
             {
@@ -64,8 +78,14 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Update a specific 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Contact>>> UpdateContact(int id, Contact request)
+        public async Task<ActionResult<Contact>> UpdateContact(int id, Contact request)
         {
             try
             {
@@ -81,8 +101,13 @@ namespace ContactsApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete contact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Contact>>> DeleteContact(int id)
+        public async Task<ActionResult> DeleteContact(int id)
         {
             try
             {
