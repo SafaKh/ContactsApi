@@ -9,6 +9,6 @@ namespace ContactsApi.Data
         }
 
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Skill> skills { get; set; }
+        public DbSet<Skill> Skills { get; set; }
     }
 }

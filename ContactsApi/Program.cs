@@ -1,5 +1,6 @@
 global using ContactsApi.Models;
 global using ContactsApi.Services.ContactService;
+global using ContactsApi.Services.SkillService;
 using ContactsApi.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IContactService,ContactService>();
+builder.Services.AddScoped<ISkillService, SkillService>();
 
 var app = builder.Build();
 
