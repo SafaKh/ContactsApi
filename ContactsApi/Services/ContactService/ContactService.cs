@@ -1,5 +1,6 @@
 ﻿using ContactsApi.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace ContactsApi.Services.ContactService
 {
@@ -14,6 +15,14 @@ namespace ContactsApi.Services.ContactService
 
         public async Task<Contact> CreateContact(Contact contact)
         {
+            // Regex pour valider le format de l'email
+            var emailRegex = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+            var match = Regex.Match(contact.Email, emailRegex);
+
+            if (!match.Success)
+            {
+                throw new ArgumentException("The email format is invalid.");
+            }
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
             return contact;
